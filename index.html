@@ -1,0 +1,213 @@
+<!DOCTYPE html>
+<html lang="es">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Rosa_roja🌹</title>
+
+    <style>
+        body {
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            height: 100vh;
+            margin: 0;
+            overflow: hidden;
+            background: linear-gradient(160deg, #ffe6f4 0%, #fa168c 35%, #f7b9de 70%, #f444c8 100%);
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+        }
+
+        .flower {
+            display: flex;
+            flex-direction: column-reverse;
+            align-items: center;
+            animation: float 3s ease-in-out infinite;
+            position: relative;
+            z-index: 1;
+        }
+
+        .flower__wrapper {
+            position: relative;
+            padding: 2vh 7vh;
+            border-radius: 50% 50% 0 0;
+            background: linear-gradient(#ff0000 -100%, transparent);
+            overflow: hidden;
+        }
+
+        .flower__sparkle {
+            position: absolute;
+            width: 6px;
+            height: 6px;
+            background: radial-gradient(circle, #fff 40%, #d7ecff 70%, transparent 100%);
+            border-radius: 50%;
+            filter: drop-shadow(0 0 6px #fff);
+            animation: sparkle-flicker 2s infinite ease-in-out;
+        }
+
+        @keyframes sparkle-flicker {
+            0%, 100% { transform: scale(0.6); opacity: 0.4; }
+            50% { transform: scale(1.4); opacity: 1; }
+        }
+
+        .imagen {
+            margin-top: 9vh;
+            height: 49vh;
+            width: 28vh;
+        }
+
+        .titulo {
+            position: absolute;
+            top: 10vh;
+            left: 50%;
+            transform: translateX(-50%);
+            width: 90%;
+            text-align: center;
+            color: rgb(255, 0, 0);
+            font-size: 3vh;
+            font-weight: bold;
+            z-index: 10;
+            text-shadow: 0 0 10px #fff;
+        }
+
+        #frase {
+            position: absolute;
+            top: 80vh;
+            left: 50%;
+            transform: translateX(-50%);
+            width: 90%;
+            text-align: center;
+            color: #ff0073;
+            text-shadow: 0 0 8px #ffb6ec;
+            font-size: 3vh;
+            font-weight: bold;
+            z-index: 10;
+            transition: opacity .3s ease-in-out;
+        }
+
+        @keyframes float {
+            0%, 100% { transform: translateY(0); }
+            50% { transform: translateY(-20px); }
+        }
+
+        .mini-flor {
+            position: absolute;
+            pointer-events: none;
+            animation: fadeOut 1s forwards;
+            font-size: 20px;
+        }
+
+        @keyframes fadeOut {
+            to { opacity: 0; transform: translateY(-50px) scale(2); }
+        }
+    </style>
+</head>
+
+<body>
+
+    <h1 class="titulo">Creador VIC👿PERSI... ❤️</h1>
+    <h2 id="frase"></h2>
+
+    <div class="flower__wrapper" id="contenido-principal">
+        <div class="flower">
+            <img class="imagen" src="https://i.pinimg.com/originals/4d/80/56/4d80564c89721f9a75cd1df36e42a467.gif">
+        </div>
+    </div>
+
+    <audio id="musica" src="https://files.catbox.moe/clrk20.mp3" loop></audio>
+
+    <script>
+        // ==========================================
+        // CONFIGURACIÓN DE VICPERSI
+        // ==========================================
+        const PALABRA_SECRETA = "amor2026"; // <--- Esta es la clave que tú le darás
+        const TU_WHATSAPP = "524493377942";
+        // ==========================================
+
+        function verificarAcceso() {
+            if (localStorage.getItem("visitado_regalo") === "true") {
+                // Si ya fue visitado, borramos el contenido y ponemos el bloqueo
+                document.body.innerHTML = `
+                <div style="display:flex; flex-direction:column; align-items:center; justify-content:center; height:100vh; text-align:center; background:#000; color:white; padding:20px; width:100%;">
+                    <img src="https://feeldreams.github.io/gumush.gif" style="width:100px; margin-bottom:20px;">
+                    <h2 style="color:#FF0040;">¡Regalo Bloqueado! ❤️</h2>
+                    <p>Este detalle es tan especial que solo se puede abrir con permiso.</p>
+                    
+                    <button onclick="pedirPermiso()" style="background:#FF0040; color:white; border:none; padding:12px 25px; border-radius:50px; font-weight:bold; cursor:pointer; margin-bottom:30px;">
+                      Pedir Código a VicPersi
+                    </button>
+
+                    <div style="background:#111; padding:20px; border-radius:15px; border:1px solid #333;">
+                        <p style="font-size:12px; color:#888;">¿Ya tienes el código?</p>
+                        <input type="text" id="inputCodigo" placeholder="Escribe la clave..." style="padding:10px; border-radius:5px; border:none; text-align:center; width:80%;">
+                        <br>
+                        <button onclick="validarCodigo()" style="background:#25d366; color:white; border:none; padding:10px 20px; border-radius:5px; margin-top:10px; cursor:pointer; width:85%;">
+                          Desbloquear Regalo
+                        </button>
+                    </div>
+                </div>`;
+            } else {
+                // Si es primera vez, dejamos que lo vea y lo marcamos como visitado al rato
+                setTimeout(() => {
+                    localStorage.setItem("visitado_regalo", "true");
+                }, 10000); // Se bloquea después de 10 segundos de estar abierto
+            }
+        }
+
+        function validarCodigo() {
+            const code = document.getElementById("inputCodigo").value;
+            if (code.toLowerCase() === PALABRA_SECRETA.toLowerCase()) {
+                localStorage.removeItem("visitado_regalo"); // Quitamos el bloqueo
+                location.reload(); // Recargamos para que vea la rosa
+            } else {
+                alert("Código incorrecto. Pídeselo a VicPersi 👿");
+            }
+        }
+
+        function pedirPermiso() {
+            const texto = encodeURIComponent("¡Hola VicPersi! Quiero ver mi regalo de nuevo, ¿me pasas el código? 👉👈");
+            window.location.href = `https://wa.me/${TU_WHATSAPP}?text=${texto}`;
+        }
+
+        // Lógica de frases y flores
+        const frases = [
+            "Amarte es mi parte favorita del día ❤️",
+            "Tu sonrisa ilumina todo lo que soy ✨",
+            "Contigo todo es más bonito 🌸",
+            "Eres mi razón, mi paz y mi todo 💕",
+            "Mi corazón late más fuerte por ti 💞",
+            "No sabía qué era el amor… hasta que te conocí 💘"
+        ];
+        
+        let i = 0;
+        const fraseEl = document.getElementById('frase');
+        if(fraseEl) {
+            fraseEl.textContent = frases[0];
+            setInterval(() => {
+                i = (i + 1) % frases.length;
+                fraseEl.style.opacity = 0;
+                setTimeout(() => {
+                    fraseEl.textContent = frases[i];
+                    fraseEl.style.opacity = 1;
+                }, 300);
+            }, 4000);
+        }
+
+        document.addEventListener('click', (e) => {
+            const audio = document.getElementById('musica');
+            if (audio && audio.paused) audio.play();
+
+            const flor = document.createElement('div');
+            flor.className = 'mini-flor';
+            flor.innerHTML = "🌸";
+            flor.style.left = e.clientX + 'px';
+            flor.style.top = e.clientY + 'px';
+            document.body.appendChild(flor);
+            setTimeout(() => flor.remove(), 1000);
+        });
+
+        // Iniciar verificación
+        verificarAcceso();
+    </script>
+</body>
+</html>
